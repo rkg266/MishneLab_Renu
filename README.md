@@ -1,1 +1,1 @@
-# Application and validation of LSSC for mulitmodal imaging data - Calclium and fMRI 
+# Validation of LSSC algorithm for mulitmodal imaging data - Calclium and fMRI 
