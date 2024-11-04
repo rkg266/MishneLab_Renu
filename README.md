@@ -4,8 +4,8 @@
 
 ## LSSC - parcellation and temporal correlation (within and across parcel)
 **Run code:** 
-* Hemisphere: run_LSSC_fmri_sessions_hemisphere.m 
 * Full brain: run_LSSC_fmri_sessions.m
+* Hemisphere: run_LSSC_fmri_sessions_hemisphere.m 
   
 **Files/folders required:** 
 * Results folder:
