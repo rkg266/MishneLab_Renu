@@ -12,8 +12,8 @@ resultDir = 'D:\UCSD_Acads\ProfGal_Research\test_run_norm1_pca0_kNN16_sftune4_he
 sesList = dir(fullfile(dataDir, 'session-*'));
 
 RUN_LSSC = 0;
-RUN_DICE_SIMILARITY = 0;
-RUN_TEMPORAL_CORR = 1;
+RUN_DICE_SIMILARITY = 1;
+RUN_TEMPORAL_CORR = 0;
 cfg.thrcluster=[0.9]; % @renu - handle this well 
 
 if (RUN_LSSC)
@@ -46,7 +46,8 @@ if (RUN_LSSC)
                 else
                     V = cat(3, V, V0); % concatenate runs
                 end 
-            else                % New subject - perform LSSC to V matrix and initialize to new subject's data
+            else                
+                %% Process the concatenated V matrix and at the end initialize it to next subject's data
                 if (i == length(fileList)) % if last file
                     prev_sub = sub_value;
                     prev_ses = ses_value;
@@ -62,13 +63,13 @@ if (RUN_LSSC)
                 V_top = V(1:MIDLINE1-1, :, :);        % Top half
                 V_bottom = V(MIDLINE2+1:end, :, :);  % Bottom half
                 
-                % Flip the bottom half vertically (along the row axis)
+                % Flip the bottom half (along the row axis)
                 V_bottom_flipped = flip(V_bottom, 1);  % Flip along the 1st dimension (rows)
                 
                 num_time_frames = size(V_top, 3);
                 
-                % Pre-allocate a new matrix to hold the interleaved data
-                ROW_PAD = 4; % To avoid out of index error in LSSC algorithm
+                % Pre-allocate a new matrix to hold the hemisphere
+                ROW_PAD = 4; % Padding to avoid out of index error in LSSC algorithm
                 V_combined_h = zeros(size(V_top, 1)+ROW_PAD, size(V_top, 2), num_time_frames);
 
                 % % Interleave the top and bottom halves in time
@@ -77,7 +78,7 @@ if (RUN_LSSC)
                 %     V_combined_h(1:MIDLINE1-1, :, 2*t) = V_bottom_flipped(:, :, t);  % Even indices: V_bottom_flipped
                 % end
 
-                % Run for both hemispheres separately
+                % Run for both hemispheres SEPARATELY
                 for hemisp = 1:2
                     for t = 1:num_time_frames
                         if (hemisp == 1)
@@ -133,7 +134,8 @@ if (RUN_LSSC)
                     save(fulloutpath, '-struct', 'results');
                 end
     
-                V = V0; % initialize to the new subject
+                % Processing done - initialize V to the next subject's data
+                V = V0; 
             end
     
             prev_sub = sub_value;
@@ -269,8 +271,11 @@ if (RUN_DICE_SIMILARITY)
     ylabel('Dice value');
     legend('Average');
     ylim([0 1]);
+
+    avg_dice_subwise = mean(displayDice, 2);
+    save("lssc_avg_dice.mat", 'avg_dice_subwise');
 end
-%%
+%%'
 if (RUN_TEMPORAL_CORR)
      % All processed files
     pFileList = dir(fullfile(resultDir, '*.mat'));
@@ -405,7 +410,7 @@ if (RUN_TEMPORAL_CORR)
         % Draw the mean as a red line inside the box
         plot([i-0.2, i+0.2], [mean_corr_across_subwise(i), mean_corr_across_subwise(i)], 'r-', 'LineWidth', 2);
     end
-    
+    save("lssc_corr_means.mat", 'mean_corr_within_subwise', 'mean_corr_across_subwise');
     % Set labels and title
     xlabel('Subjects');
     ylabel('Values');
