@@ -1,6 +1,6 @@
 # Validation of LSSC algorithm for multimodal imaging data - Calcium and fMRI 
 
-## Allen map - parcellation and temopral correlation (within and across parcel)
+## Allen map - parcellation and temporal correlation (within and across parcel)
 **Run code:** allenmaps_v0.m <br/>
 **Files/folders required:** 
 * Allen map: allen maps\2D_calcium_atlas.nii
