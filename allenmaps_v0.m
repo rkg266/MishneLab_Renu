@@ -3,13 +3,13 @@ clear;
 close all;
 
 % Maps directory
-mapDir = 'D:\UCSD_Acads\ProfGal_Research\Allen maps';
+mapDir = 'D:\UCSD_Acads\ProfGal_Research\allen maps';
 
-% Directory containing the files
+% Directory containing the fMRI data
 dataDir = 'D:\UCSD_Acads\ProfGal_Research\data32\fMRIData\REST';
 
-% Results directory
-resultDir = 'D:\UCSD_Acads\ProfGal_Research\test_run_norm1_pca0_kNN16_sftune4';
+% Store results in this directory
+resultDir = 'D:\UCSD_Acads\ProfGal_Research\test_run_Allen_fullbrain';
 
 AllenfilePath = fullfile(mapDir, '2D_calcium_atlas.nii');
 
@@ -19,8 +19,8 @@ allen_map = niftiread(AllenfilePath);
 sesList = dir(fullfile(dataDir, 'session-*'));
 
 AllenCorrStorePath = fullfile(resultDir, 'AllenTempCorr');
-RUN_ALLEN_CORR_PROCESSING = 1;
-RUN_ALLEN_CORR_REPORT = 0;
+RUN_ALLEN_CORR_PROCESSING = 0;
+RUN_ALLEN_CORR_REPORT = 1;
 
 if (RUN_ALLEN_CORR_PROCESSING)
     for ses = 1:length(sesList) % processing each session
@@ -51,16 +51,19 @@ if (RUN_ALLEN_CORR_PROCESSING)
                 else
                     V = cat(3, V, V0); % concatenate runs
                 end 
-            else                % New subject - perform LSSC to V matrix and initialize to new subject's data
+            else      
+                % Process the concatenated V matrix and at the end initialize it to next subject's data
                 if (i == length(fileList)) % if last file
                     prev_sub = sub_value;
                     prev_ses = ses_value;
                 end
-                % Run LSSC for the current data (V)
+                % V matrix holds the data of 'prev_sub', 'prev_ses'
+                % concatenated over runs
+
+                % Run Allen parcellation for the current data (V)
                 num_time_samples = size(V, 3);
         
                 % Create brain mask
-                %maxV1 = (max(V(:,:,1,:),[],3)); % @Gal doubt
                 maxV = max(V, [], 3);
                 brain_mask = maxV ~= 0;
                 brain_mask(29:32,:) = 0; 
@@ -141,8 +144,9 @@ if (RUN_ALLEN_CORR_PROCESSING)
     
                 save(fullfile(AllenCorrStorePath, ['AllenCorr_sub_' prev_sub 'ses_' num2str(prev_ses),'_out.mat']), 'clusterwise_within_corr',...
                     'clusterwise_across_corr');
-    
-                V = V0; % initialize to the new subject
+                
+                % Processing done - initialize V to the next subject's data
+                V = V0; 
             end
             prev_sub = sub_value;
             prev_ses = ses_value;
@@ -255,7 +259,7 @@ if (RUN_ALLEN_CORR_REPORT)
     figure;
     hold on;
     
-    % Plotting box-like shapes using min, max, mean, and variance
+    % Plotting box plots using min, max, mean, and variance
     for i = 1:length(subLabels)
         % Calculate lower and upper bounds of variance
         lowerBound = mean_corr_across_subwise(i) - sqrt(var_corr_across_subwise(i));
@@ -270,6 +274,8 @@ if (RUN_ALLEN_CORR_REPORT)
         % Draw the mean as a red line inside the box
         plot([i-0.2, i+0.2], [mean_corr_across_subwise(i), mean_corr_across_subwise(i)], 'r-', 'LineWidth', 2);
     end
+
+    save("allenmaps_corr_means.mat", 'mean_corr_within_subwise', 'mean_corr_across_subwise');
     
     % Set labels and title
     xlabel('Subjects');
