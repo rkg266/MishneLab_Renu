@@ -1,14 +1,21 @@
 # Validation of LSSC algorithm for multimodal imaging data - Calcium and fMRI 
 
+**fMRI raw data:** raw data\fMRIData\REST
+
 ## LSSC - parcellation and temporal correlation (within and across parcel)
-**Run code:** allenmaps_v0.m <br/>
+**Run code:** 
+* Hemisphere: run_LSSC_fmri_sessions_hemisphere.m 
+* Full brain: run_LSSC_fmri_sessions.m
+  
 **Files/folders required:** 
-* Allen map: allen maps\2D_calcium_atlas.nii
-* Results folder: allen maps\test_run_Allen_fullbrain\AllenTempCorr
+* Results folder:
+    - Full brain: lssc results\test_run_norm1_pca0_kNN16_sftune4
+    - Hemisphere: lssc results\test_run_norm1_pca0_kNN16_sftune4_hemisphere_1
 
 **How to run?:** Update the directories as per your local and set the following paramaters in the code -
-* RUN_ALLEN_CORR_PROCESSING (1/0): Enable to run the Allen parcellation and correlation calculation. Outputs (.mat) get stored in the results folder.
-* RUN_ALLEN_CORR_REPORT (1/0): Displays the correlation plots. Plots are not saved automatically. 
+* RUN_LSSC (1/0): Enable to run the LSSC parcellation. Set "Line 88: cfg.ComputeTemporalCorr = true" to enable correlation calculation.
+* RUN_DICE_SIMILARITY (1/0): Enable to compute Dice similarity and generate plots.
+* RUN_TEMPORAL_CORR (1/0): Enable to consolidate and generate temopral correlation plots. 
 
 ## Allen map - parcellation and temporal correlation (within and across parcel)
 **Run code:** allenmaps_v0.m <br/>
