@@ -15,7 +15,7 @@
 **How to run?:** Update the directories as per your local and set the following paramaters in the code -
 * RUN_LSSC (1/0): Enable to run the LSSC parcellation. Set "Line 88: cfg.ComputeTemporalCorr = true" to enable correlation calculation.
 * RUN_DICE_SIMILARITY (1/0): Enable to compute Dice similarity and generate plots.
-* RUN_TEMPORAL_CORR (1/0): Enable to consolidate and generate temopral correlation plots. 
+* RUN_TEMPORAL_CORR (1/0): Enable to consolidate and generate temporal correlation plots. 
 
 ## Allen map - parcellation and temporal correlation (within and across parcel)
 **Run code:** allenmaps_v0.m <br/>
