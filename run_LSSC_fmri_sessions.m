@@ -46,7 +46,8 @@ if (RUN_LSSC)
                 else
                     V = cat(3, V, V0); % concatenate runs
                 end 
-            else                % New subject - perform LSSC to V matrix and initialize to new subject's data
+            else                
+                %% Process the concatenated V matrix and at the end initialize it to next subject's data
                 if (i == length(fileList)) % if last file
                     prev_sub = sub_value;
                     prev_ses = ses_value;
@@ -99,7 +100,8 @@ if (RUN_LSSC)
                 results.mergedA = mergedA_all;
                 save(fulloutpath, '-struct', 'results');
     
-                V = V0; % initialize to the new subject
+                % Processing done - initialize V to the next subject's data
+                V = V0; 
             end
     
             prev_sub = sub_value;
