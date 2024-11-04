@@ -214,16 +214,6 @@ if (RUN_ALLEN_CORR_REPORT)
         displayCorr(s, 2) = mean_corr_across_subwise(s);
     end
     subLabels = {'SLC01', 'SLC03', 'SLC04', 'SLC05', 'SLC06', 'SLC07', 'SLC08', 'SLC09', 'SLC10'};
-    %groupLabels = {'Within\_parcel', 'Across\_parcel'};
-    % figure;
-    % boxplot(displayCorr);
-    % %bar(displayCorr);
-    % set(gca, 'XTickLabel', subLabels);
-    % title('Average Temporal correlation between pixels');
-    % xlabel('Subjects');
-    % ylabel('Temporal correlation');
-    % legend('Within\_parcel', 'Across\_parcel');
-    % ylim([0 1]);
 
     % Create figure
     figure;
