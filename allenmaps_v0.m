@@ -243,7 +243,7 @@ if (RUN_ALLEN_CORR_REPORT)
     % Set x-ticks to match group indices and label them as subjects
     xticks(1:length(subLabels));
     xticklabels({'SLC01', 'SLC03', 'SLC04', 'SLC05', 'SLC06', 'SLC07', 'SLC08', 'SLC09', 'SLC10'});
-    ylim([0 1]);
+    ylim([-1 1]);
     hold off;
 
     figure;
@@ -275,7 +275,7 @@ if (RUN_ALLEN_CORR_REPORT)
     % Set x-ticks to match group indices and label them as subjects
     xticks(1:length(subLabels));
     xticklabels({'SLC01', 'SLC03', 'SLC04', 'SLC05', 'SLC06', 'SLC07', 'SLC08', 'SLC09', 'SLC10'});
-    ylim([0 1]);
+    ylim([-1 1]);
     hold off;
 end
 
