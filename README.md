@@ -17,7 +17,7 @@
 * RUN_DICE_SIMILARITY (1/0): Enable to compute Dice similarity and generate plots.
 * RUN_TEMPORAL_CORR (1/0): Enable to consolidate and generate temporal correlation plots.
 
-## KNN - parcellation and temporal correlation (within and across parcel)
+## K-MEANS - parcellation and temporal correlation (within and across parcel)
 **Run code:** 
 * Hemisphere: run_KNN_fmri_sessions_hemisphere.m 
   
