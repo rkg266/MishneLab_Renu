@@ -12,8 +12,8 @@ resultDir = 'D:\UCSD_Acads\ProfGal_Research\test_run_KNN25_hemisphere_1';
 sesList = dir(fullfile(dataDir, 'session-*'));
 
 RUN_KNN = 0;
-RUN_DICE_SIMILARITY = 0;
-RUN_TEMPORAL_CORR = 1;
+RUN_DICE_SIMILARITY = 1;
+RUN_TEMPORAL_CORR = 0;
 cfg.thrcluster=[0.9]; % @renu - handle this well 
 
 if (RUN_KNN)
@@ -104,18 +104,6 @@ if (RUN_KNN)
                     % KNN Prameters
                     N_KNN_CLUSTERS = 27;
                     cfg.ComputeTemporalCorr = true;
-                    
-                    % % Apply hierarchial cluistering with correlation as
-                    % % distance metric
-                    % % Compute the correlation matrix between the pixel time series
-                    % corr_matrix = corr(dFoF_masked');  % Correlation between rows (pixels)
-                    % 
-                    % % Use 1 - correlation as the distance metric
-                    % dist_matrix = 1 - corr_matrix;
-                    % 
-                    % % Perform K-means-like clustering using hierarchical clustering with correlation distance
-                    % Z = linkage(dist_matrix, 'average');  % Average linkage hierarchical clustering
-                    % idx = cluster(Z, 'maxclust', N_KNN_CLUSTERS);
                     
                     % Apply k-means clustering with Euclidean distance
                     % metric
@@ -344,6 +332,9 @@ if (RUN_DICE_SIMILARITY)
     ylabel('Dice value');
     legend('Average');
     ylim([0 1]);
+
+    avg_dice_subwise = mean(displayDice, 2);
+    save("knn_avg_dice.mat", 'avg_dice_subwise');
 end
 %%
 if (RUN_TEMPORAL_CORR)
@@ -473,7 +464,7 @@ if (RUN_TEMPORAL_CORR)
         % Draw the mean as a red line inside the box
         plot([i-0.2, i+0.2], [mean_corr_across_subwise(i), mean_corr_across_subwise(i)], 'r-', 'LineWidth', 2);
     end
-    
+    save("KNN_corr_means.mat", 'mean_corr_within_subwise', 'mean_corr_across_subwise');
     % Set labels and title
     xlabel('Subjects');
     ylabel('Values');
