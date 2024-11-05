@@ -14,8 +14,8 @@
 
 **How to run?:** Update the directories as per your local and set the following paramaters in the code -
 * RUN_LSSC (1/0): Enable to run the LSSC parcellation. Set "Line 88: cfg.ComputeTemporalCorr = true" to enable correlation calculation.
-* RUN_DICE_SIMILARITY (1/0): Enable to compute Dice similarity and generate plots.
-* RUN_TEMPORAL_CORR (1/0): Enable to consolidate and generate temporal correlation plots.
+* RUN_DICE_SIMILARITY (1/0): Enable to compute Dice similarity and generate plots. Plots are not saved automatically.
+* RUN_TEMPORAL_CORR (1/0): Enable to consolidate and generate temporal correlation plots. Plots are not saved automatically.
 
 ## K-MEANS - parcellation and temporal correlation (within and across parcel)
 **Run code:** 
@@ -27,10 +27,11 @@
 
 **How to run?:** Update the directories as per your local and set the following paramaters in the code -
 * RUN_KNN (1/0): Enable to run the KNN parcellation. <br/>"Line 105: N_KNN_CLUSTERS = 27" to modify the number of clusters. <br/>Set "Line 106: cfg.ComputeTemporalCorr = true" to enable correlation calculation.
-* RUN_DICE_SIMILARITY (1/0): Enable to compute Dice similarity and generate plots.
-* RUN_TEMPORAL_CORR (1/0): Enable to consolidate and generate temporal correlation plots. 
+* RUN_DICE_SIMILARITY (1/0): Enable to compute Dice similarity and generate plots. Plots are not saved automatically.
+* RUN_TEMPORAL_CORR (1/0): Enable to consolidate and generate temporal correlation plots. Plots are not saved automatically.
 
 ## Allen map - parcellation and temporal correlation (within and across parcel)
+(Currently code is for FULLBRAIN. Will update soon for hemispheres.)<br/>
 **Run code:** allenmaps_v0.m <br/>
 **Files/folders required:** 
 * Allen map: allen maps\2D_calcium_atlas.nii
@@ -39,6 +40,7 @@
 **How to run?:** Update the directories as per your local and set the following paramaters in the code -
 * RUN_ALLEN_CORR_PROCESSING (1/0): Enable to run the Allen parcellation and correlation calculation. Outputs (.mat) get stored in the results folder.
 * RUN_ALLEN_CORR_REPORT (1/0): Displays the correlation plots. Plots are not saved automatically. 
+
 
 @Gal: Debug Calcium-LSSC code. <br/>
 **Tip:** Search "@renu" in the code files to see my additions/edits. <br/>
