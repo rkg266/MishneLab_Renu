@@ -15,6 +15,19 @@
 **How to run?:** Update the directories as per your local and set the following paramaters in the code -
 * RUN_LSSC (1/0): Enable to run the LSSC parcellation. Set "Line 88: cfg.ComputeTemporalCorr = true" to enable correlation calculation.
 * RUN_DICE_SIMILARITY (1/0): Enable to compute Dice similarity and generate plots.
+* RUN_TEMPORAL_CORR (1/0): Enable to consolidate and generate temporal correlation plots.
+
+## KNN - parcellation and temporal correlation (within and across parcel)
+**Run code:** 
+* Hemisphere: run_KNN_fmri_sessions_hemisphere.m 
+  
+**Files/folders required:** 
+* Results folder:
+    - Hemisphere: knn results\test_run_KNN25_hemisphere_1
+
+**How to run?:** Update the directories as per your local and set the following paramaters in the code -
+* RUN_KNN (1/0): Enable to run the KNN parcellation. <br/>"Line 105: N_KNN_CLUSTERS = 27" to modify the number of clusters. <br/>Set "Line 88: cfg.ComputeTemporalCorr = true" to enable correlation calculation.
+* RUN_DICE_SIMILARITY (1/0): Enable to compute Dice similarity and generate plots.
 * RUN_TEMPORAL_CORR (1/0): Enable to consolidate and generate temporal correlation plots. 
 
 ## Allen map - parcellation and temporal correlation (within and across parcel)
