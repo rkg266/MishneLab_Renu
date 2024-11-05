@@ -6,7 +6,7 @@ close all;
 dataDir = 'D:\UCSD_Acads\ProfGal_Research\data32\fMRIData\REST';
 
 % Results diectory
-resultDir = 'D:\UCSD_Acads\ProfGal_Research\test_run_KNN25_hemisphere_1';
+resultDir = 'D:\UCSD_Acads\ProfGal_Research\test_run_KNN27_hemisphere_1';
 
 % All sessions in the directory
 sesList = dir(fullfile(dataDir, 'session-*'));
